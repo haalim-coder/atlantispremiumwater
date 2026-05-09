@@ -49,23 +49,27 @@
 
     
     /* HERO */
-.hero{background:#cce8f7 url('hero-banner.png') center center/contain no-repeat;min-height:100vh;padding:5rem 5% 3.5rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;position:relative;overflow:hidden;}
+.hero{background:linear-gradient(145deg,#001c3d 0%,#0057a8 55%,#0099dd 100%);min-height:88vh;padding:5rem 5% 3.5rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;position:relative;overflow:hidden;}
 .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:65px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 65'%3E%3Cpath fill='%23ffffff' d='M0,32 C360,65 1080,0 1440,32 L1440,65 L0,65 Z'/%3E%3C/svg%3E") no-repeat bottom/cover;pointer-events:none;}
 .hero-orb{position:absolute;right:-80px;top:-80px;width:480px;height:480px;background:radial-gradient(circle,rgba(0,180,216,.18),transparent 65%);border-radius:50%;pointer-events:none;}
-.hero-left{position:relative;z-index:2;background:rgba(255,255,255,.78);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:20px;padding:2.5rem 2.2rem;max-width:540px;}
-.hero-chip{display:inline-flex;align-items:center;gap:.45rem;background:rgba(0,28,61,.08);border:1.5px solid rgba(0,28,61,.15);color:#001c3d;border-radius:6px;padding:.32rem .88rem;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.35rem;animation:up .5s ease both;}
+.hero-left{position:relative;z-index:2;}
+.hero-chip{display:inline-flex;align-items:center;gap:.45rem;background:rgba(255,255,255,.11);border:1.5px solid rgba(255,255,255,.2);color:#fff;border-radius:6px;padding:.32rem .88rem;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.35rem;animation:up .5s ease both;}
 .hero-chip-dot{width:6px;height:6px;background:#00e5a0;border-radius:50%;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.5);}}
-.hero-h1{font-family:'DM Serif Display',serif;font-size:clamp(2.1rem,4.2vw,3.7rem);font-weight:400;line-height:1.1;color:#001c3d;margin-bottom:1.1rem;animation:up .5s .08s ease both;}
-.hero-h1 em{font-style:italic;color:#0057a8;}
-.hero-p{font-size:.96rem;font-weight:400;color:#003366;line-height:1.8;max-width:440px;margin-bottom:2rem;animation:up .5s .15s ease both;}
+.hero-h1{font-family:'DM Serif Display',serif;font-size:clamp(2.1rem,4.2vw,3.7rem);font-weight:400;line-height:1.1;color:#fff;margin-bottom:1.1rem;animation:up .5s .08s ease both;}
+.hero-h1 em{font-style:italic;color:#7dd3fc;}
+.hero-p{font-size:.96rem;font-weight:400;color:rgba(255,255,255,.75);line-height:1.8;max-width:440px;margin-bottom:2rem;animation:up .5s .15s ease both;}
 .hero-btns{display:flex;gap:.9rem;flex-wrap:wrap;animation:up .5s .22s ease both;}
-.btn-white{background:#0057a8;color:#fff;padding:.82rem 1.8rem;border-radius:7px;font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;}
-.btn-white:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,87,168,.35);}
-.btn-ghost{background:transparent;color:#001c3d;border:2px solid rgba(0,28,61,.4);padding:.8rem 1.75rem;border-radius:7px;font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;}
-.btn-ghost:hover{background:rgba(0,28,61,.08);border-color:rgba(0,28,61,.6);}
+.btn-white{background:#fff;color:var(--blue);padding:.82rem 1.8rem;border-radius:7px;font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.2);}
+.btn-ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.4);padding:.8rem 1.75rem;border-radius:7px;font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;}
+.btn-ghost:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.65);}
 .hero-right{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;animation:up .7s .18s ease both;}
 .hero-bottles-img{width:100%;max-width:560px;border-radius:18px;filter:drop-shadow(0 20px 44px rgba(0,0,0,.38));object-fit:contain;}
+
+/* BANNER */
+.banner-section{width:100%;overflow:hidden;line-height:0;}
+.banner-section img{width:100%;display:block;object-fit:cover;}
 
     /* WA float */
     .wa-float{position:fixed;bottom:1.8rem;right:1.8rem;z-index:500;background:#25d366;color:#fff;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 18px rgba(37,211,102,.5);transition:transform .2s;}
@@ -340,6 +344,11 @@
     </div>
   </div>
   
+</section>
+
+<!-- BANNER -->
+<section class="banner-section">
+  <img src="hero-banner.png" alt="Atlantis Premium Water — Hydration Refined" loading="lazy"/>
 </section>
 
 <!-- TRUST BAR -->
