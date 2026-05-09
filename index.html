@@ -48,7 +48,7 @@
     .hbg span{display:block;width:23px;height:2px;background:var(--text);border-radius:2px;}
 
     /* HERO */
-    .hero{background:linear-gradient(rgba(0,28,61,.55),rgba(0,87,168,.45)),url('hero-banner.png') center/cover no-repeat;min-height:88vh;padding:5rem 5% 3.5rem;display:grid;grid-template-columns:1fr;gap:3rem;align-items:center;position:relative;overflow:hidden;}
+    .hero{background:linear-gradient(rgba(0,28,61,.55),rgba(0,87,168,.45)),url('hero-banner.jpeg') center/cover no-repeat;min-height:88vh;padding:5rem 5% 3.5rem;display:grid;grid-template-columns:1fr;gap:3rem;align-items:center;position:relative;overflow:hidden;}
     .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:65px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 65'%3E%3Cpath fill='%23ffffff' d='M0,32 C360,65 1080,0 1440,32 L1440,65 L0,65 Z'/%3E%3C/svg%3E") no-repeat bottom/cover;pointer-events:none;}
     .hero-orb{position:absolute;right:-80px;top:-80px;width:480px;height:480px;background:radial-gradient(circle,rgba(0,180,216,.18),transparent 65%);border-radius:50%;pointer-events:none;}
     .hero-left{position:relative;z-index:2;}
@@ -298,18 +298,8 @@
 <nav>
   <a href="#home" class="logo">
     <div class="logo-svg-wrap">
-      <svg width="44" height="44" viewBox="0 0 52 52" fill="none">
-        <circle cx="26" cy="26" r="25" fill="#0057a8"/>
-        <path d="M10 32 Q26 12 42 32" stroke="#fff" stroke-width="2.5" fill="none" opacity=".9"/>
-        <path d="M14 32 Q26 16 38 32" stroke="#7dd3fc" stroke-width="1.5" fill="none" opacity=".7"/>
-        <rect x="10" y="31" width="32" height="3" rx="1.5" fill="#fff" opacity=".8"/>
-        <circle cx="26" cy="15" r="3.5" fill="#f0c040"/>
-        <line x1="26" y1="9" x2="26" y2="7" stroke="#f0c040" stroke-width="1.5" stroke-linecap="round"/>
-        <line x1="30.5" y1="10.5" x2="31.8" y2="9" stroke="#f0c040" stroke-width="1.5" stroke-linecap="round"/>
-        <line x1="21.5" y1="10.5" x2="20.2" y2="9" stroke="#f0c040" stroke-width="1.5" stroke-linecap="round"/>
-        <text x="26" y="45" text-anchor="middle" font-size="6.5" font-weight="900" font-family="Outfit,sans-serif" fill="white" letter-spacing="1">ATLANTIS</text>
-      </svg>
-    </div>
+  <img src="atlantis-logo.png" alt="Atlantis Logo" style="width:44px;height:44px;object-fit:cover;border-radius:50%;">
+</div>
     <div class="logo-words"><div class="logo-main">Atlantis</div><div class="logo-sub">Premium Water</div></div>
   </a>
   <ul class="nav-links">
