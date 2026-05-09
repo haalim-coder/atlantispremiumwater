@@ -48,7 +48,7 @@
     .hbg span{display:block;width:23px;height:2px;background:var(--text);border-radius:2px;}
 
     /* HERO */
-    .hero{background:linear-gradient(145deg,#001c3d 0%,#0057a8 55%,#0099dd 100%);min-height:88vh;padding:5rem 5% 3.5rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;position:relative;overflow:hidden;}
+    .hero{background:linear-gradient(rgba(0,28,61,.55),rgba(0,87,168,.45)),url('hero-banner.png') center/cover no-repeat;min-height:88vh;padding:5rem 5% 3.5rem;display:grid;grid-template-columns:1fr;gap:3rem;align-items:center;position:relative;overflow:hidden;}
     .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:65px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 65'%3E%3Cpath fill='%23ffffff' d='M0,32 C360,65 1080,0 1440,32 L1440,65 L0,65 Z'/%3E%3C/svg%3E") no-repeat bottom/cover;pointer-events:none;}
     .hero-orb{position:absolute;right:-80px;top:-80px;width:480px;height:480px;background:radial-gradient(circle,rgba(0,180,216,.18),transparent 65%);border-radius:50%;pointer-events:none;}
     .hero-left{position:relative;z-index:2;}
@@ -348,9 +348,7 @@
       <a href="#contact" class="btn-ghost">Order Now</a>
     </div>
   </div>
-  <div class="hero-right">
-    <img class="hero-bottles-img" src="bottles-all.png" alt="Atlantis Premium Water bottles — 500ml, 1.5L, 10L and 19L" loading="eager"/>
-  </div>
+  
 </section>
 
 <!-- TRUST BAR -->
@@ -578,16 +576,19 @@
 </section>
 
 <!-- MAP -->
-<iframe
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3322.280330472692!2d73.1143938!3d33.623972699999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfeb151fa61919%3A0x4ac13b0a4696ca01!2sAtlantis%20Premium%20Water!5e0!3m2!1sen!2s!4v1778271027562!5m2!1sen!2s"
-  width="100%"
-  height="340"
-  style="border:0;display:block;"
-  allowfullscreen=""
-  loading="lazy"
-  referrerpolicy="no-referrer-when-downgrade"
-  title="Atlantis Premium Water Location">
-</iframe>
+<div class="map-section" id="map">
+  <div class="map-card">
+    <div class="map-header">
+      <div class="map-header-ico"><svg viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+      <div class="map-header-text">
+        <strong>Atlantis Premium Water — Khana Rawalpindi</strong>
+        <span>Plot 615-616, Service Road, Fiazia Colony, Near TCS Office</span>
+      </div>
+      <a class="map-header-link" href="https://maps.google.com/?q=Khana+Rawalpindi+Fiazia+Colony+Service+Road" target="_blank">Open in Maps</a>
+    </div>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3318.5!2d73.15!3d33.55!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzPCsDMzJzAwLjAiTiA3M8KwMDknMDAuMCJF!5e0!3m2!1sen!2spk!4v1620000000000!5m2!1sen!2spk" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Atlantis Premium Water Location"></iframe>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -635,8 +636,8 @@
     try{const res=await fetch(SHEETDB_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data:[{timestamp:new Date().toLocaleString('en-PK',{timeZone:'Asia/Karachi'}),firstName:fn,lastName:ln,phone:ph,address:ad,product:pr,message:ms||'—'}]})});if(!res.ok)throw 0;document.getElementById('fsuccess').style.display='block';['f_fname','f_lname','f_phone','f_address','f_product','f_message'].forEach(id=>document.getElementById(id).value='');setTimeout(()=>document.getElementById('fsuccess').style.display='none',7000);}catch(e){alert('Could not send. Please try WhatsApp.');}
     btn.disabled=false;btn.textContent='Send Order Request';
   }
-  const ADMIN_HASH='8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918';
-function openAdmin(){const p=prompt('Admin password:');crypto.subtle.digest('SHA-256',new TextEncoder().encode(p)).then(h=>{const hex=[...new Uint8Array(h)].map(b=>b.toString(16).padStart(2,'0')).join('');if(hex!==ADMIN_HASH){alert('Wrong!');return;}document.getElementById('adminPanel').style.display='flex';loadOrders();});}
+  const ADMIN_PASS='atlantis2025';
+  function openAdmin(){const p=prompt('Admin password:');if(p!==ADMIN_PASS){alert('Wrong!');return;}document.getElementById('adminPanel').style.display='flex';loadOrders();}
   function closeAdmin(){document.getElementById('adminPanel').style.display='none';}
   async function loadOrders(){document.getElementById('adminTable').innerHTML='<tr><td colspan="6" style="text-align:center;padding:2rem;">Loading...</td></tr>';try{const data=await(await fetch(SHEETDB_URL)).json();if(!data.length){document.getElementById('adminTable').innerHTML='<tr><td colspan="6" style="text-align:center;padding:2rem;color:#888;">No orders yet.</td></tr>';return;}document.getElementById('adminCount').textContent=data.length+' orders';document.getElementById('adminTable').innerHTML=data.reverse().map(o=>`<tr><td>${o.timestamp||'—'}</td><td>${o.firstName||''} ${o.lastName||''}</td><td>${o.phone||'—'}</td><td>${o.address||'—'}</td><td><strong>${o.product||'—'}</strong></td><td>${o.message||'—'}</td></tr>`).join('');}catch(e){document.getElementById('adminTable').innerHTML='<tr><td colspan="6" style="text-align:center;color:red;padding:2rem;">Failed to load.</td></tr>';}}
 </script>
