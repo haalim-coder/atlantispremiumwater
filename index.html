@@ -49,7 +49,7 @@
 
     
     /* HERO */
-.hero{background:linear-gradient(145deg,#001c3d 0%,#0057a8 55%,#0099dd 100%);min-height:88vh;padding:5rem 5% 3.5rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;position:relative;overflow:hidden;}
+.hero{background:linear-gradient(rgba(0,15,40,.72),rgba(0,60,130,.65)),url('hero.jpg') center center/cover no-repeat;min-height:88vh;padding:5rem 5% 3.5rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;position:relative;overflow:hidden;}
 .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:65px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 65'%3E%3Cpath fill='%23ffffff' d='M0,32 C360,65 1080,0 1440,32 L1440,65 L0,65 Z'/%3E%3C/svg%3E") no-repeat bottom/cover;pointer-events:none;}
 .hero-orb{position:absolute;right:-80px;top:-80px;width:480px;height:480px;background:radial-gradient(circle,rgba(0,180,216,.18),transparent 65%);border-radius:50%;pointer-events:none;}
 .hero-left{position:relative;z-index:2;}
@@ -113,9 +113,55 @@
     .p-desc{font-size:.73rem;font-weight:400;color:var(--gray);line-height:1.58;margin-bottom:.8rem;}
     .p-badge{display:inline-block;background:var(--blue3);color:var(--blue);font-size:.62rem;font-weight:700;padding:.18rem .65rem;border-radius:18px;}
 
+    /* CART */
+    .cart-fab{position:fixed;top:80px;right:1.5rem;z-index:300;background:var(--blue);color:#fff;border:none;border-radius:50px;padding:.55rem 1.1rem;font-family:'Outfit',sans-serif;font-weight:800;font-size:.82rem;cursor:pointer;box-shadow:0 4px 18px rgba(0,87,168,.35);display:flex;align-items:center;gap:.4rem;transition:all .2s;}
+    .cart-fab:hover{background:var(--blue2);transform:translateY(-2px);}
+    .cart-badge{background:#00e5a0;color:#001c3d;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:900;}
+    .cart-drawer{position:fixed;right:-420px;top:0;width:400px;max-width:100vw;height:100vh;background:#fff;z-index:400;box-shadow:-4px 0 28px rgba(0,0,0,.15);transition:right .3s ease;display:flex;flex-direction:column;}
+    .cart-drawer.open{right:0;}
+    .cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:399;display:none;}
+    .cart-overlay.open{display:block;}
+    .cart-head{background:linear-gradient(135deg,#001c3d,#0057a8);color:#fff;padding:1.2rem 1.5rem;display:flex;justify-content:space-between;align-items:center;}
+    .cart-head h3{font-size:1rem;font-weight:800;}
+    .cart-close{background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:7px;padding:.38rem .8rem;cursor:pointer;font-weight:700;font-size:.8rem;}
+    .cart-body{flex:1;overflow-y:auto;padding:1rem;}
+    .cart-empty{text-align:center;padding:3rem 1rem;color:var(--gray);}
+    .cart-item{display:flex;align-items:center;gap:.8rem;padding:.8rem;background:var(--light);border-radius:10px;margin-bottom:.6rem;border:1.5px solid var(--border);}
+    .cart-item-img{width:52px;height:52px;background:var(--blue3);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .cart-item-img img{max-height:46px;max-width:46px;object-fit:contain;}
+    .cart-item-info{flex:1;}
+    .cart-item-name{font-size:.82rem;font-weight:700;color:var(--text);}
+    .cart-item-sub{font-size:.68rem;color:var(--gray);}
+    .cart-qty{display:flex;align-items:center;gap:.4rem;}
+    .qty-btn{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--border);background:#fff;color:var(--blue);font-weight:900;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;}
+    .qty-btn.plus{background:var(--blue);color:#fff;border-color:var(--blue);}
+    .qty-num{font-weight:800;color:var(--blue);min-width:18px;text-align:center;font-size:.88rem;}
+    .cart-foot{padding:1rem 1.5rem;border-top:1.5px solid var(--border);}
+    .cart-summary{background:var(--blue3);border-radius:8px;padding:.8rem 1rem;margin-bottom:.8rem;font-size:.8rem;color:var(--text);}
+    .cart-summary strong{display:block;font-size:.65rem;font-weight:700;color:var(--blue);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem;}
+    .checkout-btn{width:100%;background:var(--blue);color:#fff;border:none;border-radius:8px;padding:.85rem;font-family:'Outfit',sans-serif;font-weight:800;font-size:.9rem;cursor:pointer;margin-bottom:.5rem;transition:background .2s;}
+    .checkout-btn:hover{background:var(--blue2);}
+    .add-to-cart-btn{width:100%;background:var(--blue3);color:var(--blue);border:1.5px solid var(--blue);border-radius:7px;padding:.52rem;font-family:'Outfit',sans-serif;font-weight:700;font-size:.78rem;cursor:pointer;margin-top:.6rem;transition:all .2s;}
+    .add-to-cart-btn:hover{background:var(--blue);color:#fff;}
+    .add-to-cart-btn.added{background:var(--blue);color:#fff;}
+    /* CHECKOUT MODAL */
+    .checkout-modal{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:1rem;}
+    .checkout-modal.open{display:flex;}
+    .checkout-box{background:#fff;border-radius:16px;width:100%;max-width:520px;max-height:92vh;overflow-y:auto;}
+    .checkout-box-head{background:linear-gradient(135deg,#001c3d,#0057a8);color:#fff;padding:1.2rem 1.5rem;display:flex;justify-content:space-between;align-items:center;border-radius:16px 16px 0 0;}
+    .checkout-box-head h3{font-size:1rem;font-weight:800;}
+    .checkout-body{padding:1.5rem;}
+    .order-summary-box{background:var(--blue3);border-radius:8px;padding:.9rem 1rem;margin-bottom:1.2rem;}
+    .order-summary-box strong{display:block;font-size:.62rem;font-weight:700;color:var(--blue);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.5rem;}
+    .order-summary-item{font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:.18rem;}
+    .csuccess{display:none;text-align:center;padding:2rem;}
+    .csuccess-icon{font-size:3rem;margin-bottom:.5rem;}
+    .csuccess h3{color:var(--blue);font-size:1.2rem;font-weight:900;margin-bottom:.4rem;}
+    .csuccess p{color:var(--gray);font-size:.85rem;}
+
     /* MINERALS */
-    .minerals-sec{background:linear-gradient(155deg,#001c3d 0%,#0057a8 58%,#0099dd 100%);color:#fff;padding:5rem 5%;position:relative;overflow:hidden;}
-    .minerals-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(0,180,216,.13),transparent 60%);pointer-events:none;}
+    .minerals-sec{background:linear-gradient(rgba(0,15,40,.82),rgba(0,60,130,.78)),url('mineral.jfif') center center/cover no-repeat;color:#fff;padding:5rem 5%;position:relative;overflow:hidden;}
+    .minerals-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(0,180,216,.08),transparent 60%);pointer-events:none;}
     .minerals-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;}
     .minerals-text .sec-tag{color:rgba(255,255,255,.6);}
     .minerals-text .sec-tag::before{background:rgba(255,255,255,.38);}
@@ -209,7 +255,7 @@
     .map-card iframe{width:100%;height:340px;border:none;display:block;}
 
     /* FOOTER */
-    footer{background:var(--text);color:rgba(255,255,255,.58);padding:3.2rem 5% 1.8rem;}
+    footer{background:linear-gradient(rgba(10,20,40,.92),rgba(10,20,40,.92)),url('final.jfif') center center/cover no-repeat;color:rgba(255,255,255,.58);padding:3.2rem 5% 1.8rem;}
     .ft{display:flex;justify-content:space-between;gap:2.5rem;padding-bottom:2.2rem;border-bottom:1px solid rgba(255,255,255,.07);flex-wrap:wrap;}
     .ft-brand{max-width:240px;}
     .ft-brand .logo-main{color:#fff;}
@@ -290,7 +336,63 @@
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
-<!-- STRIP -->
+<!-- CART FAB -->
+<button class="cart-fab" id="cartFab" onclick="toggleCart()" style="display:none;">
+  🛒 Cart <span class="cart-badge" id="cartBadge">0</span>
+</button>
+
+<!-- CART OVERLAY -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+<!-- CART DRAWER -->
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <h3>🛒 Your Cart</h3>
+    <button class="cart-close" onclick="toggleCart()">Close ✕</button>
+  </div>
+  <div class="cart-body" id="cartBody">
+    <div class="cart-empty">Your cart is empty.<br>Add products below.</div>
+  </div>
+  <div class="cart-foot" id="cartFoot" style="display:none;">
+    <div class="cart-summary" id="cartSummary"><strong>ORDER SUMMARY</strong></div>
+    <button class="checkout-btn" onclick="openCheckout()">Proceed to Checkout →</button>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="checkout-modal" id="checkoutModal">
+  <div class="checkout-box">
+    <div class="checkout-box-head">
+      <h3>Complete Your Order</h3>
+      <button class="cart-close" onclick="closeCheckout()">✕</button>
+    </div>
+    <div class="checkout-body">
+      <div id="checkoutSuccess" class="csuccess">
+        <div class="csuccess-icon">✅</div>
+        <h3>Order Sent!</h3>
+        <p>We'll call you back within 1 hour to confirm your order.</p>
+        <button onclick="closeCheckout()" style="margin-top:1.2rem;background:var(--blue);color:#fff;border:none;border-radius:8px;padding:.75rem 2rem;font-family:inherit;font-weight:700;cursor:pointer;">Done</button>
+      </div>
+      <div id="checkoutForm">
+        <div class="order-summary-box" id="checkoutSummary"><strong>YOUR ORDER</strong></div>
+        <div class="frow">
+          <div class="fg"><label>First Name</label><input id="c_fname" type="text" placeholder="Muhammad"/><span class="ferror" id="ce_fname"></span></div>
+          <div class="fg"><label>Last Name</label><input id="c_lname" type="text" placeholder="Ali"/><span class="ferror" id="ce_lname"></span></div>
+        </div>
+        <div class="fg"><label>Phone Number</label><input id="c_phone" type="tel" placeholder="0300 1234567"/><span class="ferror" id="ce_phone"></span></div>
+        <div class="fg"><label>Delivery Address</label><input id="c_address" type="text" placeholder="Your address in Rawalpindi"/><span class="ferror" id="ce_address"></span></div>
+        <div class="fg"><label>Message / Special Instructions</label><textarea id="c_message" placeholder="Any special instructions?"></textarea></div>
+        <button class="fsub" onclick="submitCartOrder()">Send Order Request</button>
+        <a class="wa-btn" id="waCartBtn" href="#" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Order via WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div class="strip">
   <div class="strip-left"><span>&#x1F1F5;&#x1F1F0;</span><span>Serving Rawalpindi &amp; Surrounding Areas — Pure. Safe. Fresh.</span></div>
   <div class="strip-right">
@@ -374,7 +476,7 @@
       <div class="p-name">Mini Bottle</div>
       <div class="p-desc">Perfect for school, gym and travel. Stay hydrated on the go wherever you are.</div>
       <span class="p-badge">On-The-Go</span>
-    </div>
+      <button class="add-to-cart-btn" onclick="addToCart('500ml Mini Bottle','bottle-500ml.png','500ML')">Add to Cart</button>
     <div class="p-card hot rev">
       <div class="hot-tag">Most Popular</div>
       <div class="p-img-wrap"><img src="bottle-1_5l.png" alt="Atlantis 1.5L water bottle"/></div>
@@ -382,21 +484,21 @@
       <div class="p-name">Classic Bottle</div>
       <div class="p-desc">Ideal for daily personal use. The whole family's favourite choice every day.</div>
       <span class="p-badge">Best Seller</span>
-    </div>
+      <button class="add-to-cart-btn" onclick="addToCart('1.5L Classic Bottle','bottle-1_5l.png','1.5L')">Add to Cart</button>
     <div class="p-card rev">
       <div class="p-img-wrap"><img src="bottle-10l.png" alt="Atlantis 10L family water bottle"/></div>
       <div class="p-size">10</div><div class="p-unit">Litre</div>
       <div class="p-name">Family Bottle</div>
       <div class="p-desc">Home and kitchen use. Easy to carry and store, perfect for the whole family.</div>
       <span class="p-badge">Family Size</span>
-    </div>
+      <button class="add-to-cart-btn" onclick="addToCart('10L Family Bottle','bottle-10l.png','10L')">Add to Cart</button>
     <div class="p-card rev">
       <div class="p-img-wrap"><img src="bottle-19l.png" alt="Atlantis 19L office dispenser"/></div>
       <div class="p-size">19</div><div class="p-unit">Litre</div>
       <div class="p-name">Office Dispenser</div>
       <div class="p-desc">Bulk refill for offices and businesses. Works with all standard water dispensers.</div>
       <span class="p-badge">Bulk Supply</span>
-    </div>
+      <button class="add-to-cart-btn" onclick="addToCart('19L Office Dispenser','bottle-19l.png','19L')">Add to Cart</button>
   </div>
 </section>
 
@@ -586,16 +688,7 @@
       </div>
       <a class="map-header-link" href="https://maps.google.com/?q=Khana+Rawalpindi+Fiazia+Colony+Service+Road" target="_blank">Open in Maps</a>
     </div>
-    <iframe
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3322.280330472692!2d73.1143938!3d33.623972699999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfeb151fa61919%3A0x4ac13b0a4696ca01!2sAtlantis%20Premium%20Water!5e0!3m2!1sen!2s!4v1778271027562!5m2!1sen!2s"
-  width="100%"
-  height="340"
-  style="border:0;display:block;"
-  allowfullscreen=""
-  loading="lazy"
-  referrerpolicy="no-referrer-when-downgrade"
-  title="Atlantis Premium Water Location">
-</iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3318.5!2d73.15!3d33.55!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzPCsDMzJzAwLjAiTiA3M8KwMDknMDAuMCJF!5e0!3m2!1sen!2spk!4v1620000000000!5m2!1sen!2spk" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Atlantis Premium Water Location"></iframe>
   </div>
 </div>
 
@@ -622,15 +715,133 @@
 </footer>
 
 <script>
-  new IntersectionObserver((entries)=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*50);obs.unobserve(e.target);}});},{threshold:.07}).observe&&
+  // SCROLL ANIMATIONS
   (()=>{const obs=new IntersectionObserver((entries)=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*50);obs.unobserve(e.target);}});},{threshold:.07});document.querySelectorAll('.rev').forEach(r=>obs.observe(r));})();
 
+  // NAV
   function toggleMenu(){document.getElementById('mobMenu').classList.toggle('open');}
+  let navLocked=false;
+  document.querySelectorAll('.nav-links a,.mob-menu a,.nav-order').forEach(link=>{
+    link.addEventListener('click',function(e){
+      if(navLocked)return e.preventDefault();
+      navLocked=true;document.body.style.cursor='wait';
+      setTimeout(()=>{navLocked=false;document.body.style.cursor='';},800);
+    });
+  });
 
+  // SHEETDB
   const SHEETDB_URL='https://sheetdb.io/api/v1/c0az08qlmc4nw';
+  function validatePhone(p){return/^(\+92|0092|0)?[3][0-9]{9}$/.test(p.replace(/\s/g,''));}
+
+  // CART STATE
+  let cart=[];
+
+  function addToCart(name,img,size){
+    const existing=cart.find(i=>i.name===name);
+    if(existing){existing.qty++;}else{cart.push({name,img,size,qty:1});}
+    renderCart();
+    toggleCart(true);
+  }
+
+  function updateQty(name,delta){
+    const item=cart.find(i=>i.name===name);
+    if(!item)return;
+    item.qty=Math.max(0,item.qty+delta);
+    if(item.qty===0)cart=cart.filter(i=>i.name!==name);
+    renderCart();
+  }
+
+  function totalItems(){return cart.reduce((s,i)=>s+i.qty,0);}
+
+  function renderCart(){
+    const total=totalItems();
+    const fab=document.getElementById('cartFab');
+    const badge=document.getElementById('cartBadge');
+    fab.style.display=total>0?'flex':'none';
+    badge.textContent=total;
+
+    const body=document.getElementById('cartBody');
+    const foot=document.getElementById('cartFoot');
+    const summary=document.getElementById('cartSummary');
+
+    if(cart.length===0){
+      body.innerHTML='<div class="cart-empty">Your cart is empty.<br>Add products below.</div>';
+      foot.style.display='none';
+      return;
+    }
+
+    body.innerHTML=cart.map(item=>`
+      <div class="cart-item">
+        <div class="cart-item-img"><img src="${item.img}" alt="${item.name}" onerror="this.style.display='none'"/></div>
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.size} ${item.name.split(' ').slice(1).join(' ')}</div>
+          <div class="cart-item-sub">${item.name}</div>
+        </div>
+        <div class="cart-qty">
+          <button class="qty-btn" onclick="updateQty('${item.name}',-1)">−</button>
+          <span class="qty-num">${item.qty}</span>
+          <button class="qty-btn plus" onclick="updateQty('${item.name}',1)">+</button>
+        </div>
+      </div>
+    `).join('');
+
+    summary.innerHTML='<strong>ORDER SUMMARY</strong>'+cart.map(i=>`<div style="font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:.15rem;">${i.qty}x ${i.name}</div>`).join('');
+    foot.style.display='block';
+  }
+
+  function toggleCart(forceOpen){
+    const drawer=document.getElementById('cartDrawer');
+    const overlay=document.getElementById('cartOverlay');
+    const isOpen=drawer.classList.contains('open');
+    if(forceOpen===true&&isOpen)return;
+    drawer.classList.toggle('open');
+    overlay.classList.toggle('open');
+  }
+
+  function openCheckout(){
+    toggleCart();
+    const summary=document.getElementById('checkoutSummary');
+    summary.innerHTML='<strong>YOUR ORDER</strong>'+cart.map(i=>`<div class="order-summary-item">${i.qty}x ${i.name}</div>`).join('');
+    const waText=encodeURIComponent('Hi Atlantis! I want to order: '+cart.map(i=>`${i.qty}x ${i.name}`).join(', '));
+    document.getElementById('waCartBtn').href=`https://wa.me/923465001752?text=${waText}`;
+    document.getElementById('checkoutForm').style.display='block';
+    document.getElementById('checkoutSuccess').style.display='none';
+    document.getElementById('checkoutModal').classList.add('open');
+  }
+
+  function closeCheckout(){
+    document.getElementById('checkoutModal').classList.remove('open');
+  }
+
+  async function submitCartOrder(){
+    const errs=document.querySelectorAll('.ferror');errs.forEach(e=>e.style.display='none');
+    const fn=document.getElementById('c_fname').value.trim();
+    const ln=document.getElementById('c_lname').value.trim();
+    const ph=document.getElementById('c_phone').value.trim();
+    const ad=document.getElementById('c_address').value.trim();
+    const ms=document.getElementById('c_message').value.trim();
+    let ok=true;
+    if(!fn){const e=document.getElementById('ce_fname');e.textContent='First name required.';e.style.display='block';ok=false;}
+    if(!ln){const e=document.getElementById('ce_lname');e.textContent='Last name required.';e.style.display='block';ok=false;}
+    if(!ph){const e=document.getElementById('ce_phone');e.textContent='Phone required.';e.style.display='block';ok=false;}
+    else if(!validatePhone(ph)){const e=document.getElementById('ce_phone');e.textContent='Enter valid Pakistani number.';e.style.display='block';ok=false;}
+    if(!ad){const e=document.getElementById('ce_address');e.textContent='Address required.';e.style.display='block';ok=false;}
+    if(!ok)return;
+    const btn=document.querySelector('#checkoutForm .fsub');btn.disabled=true;btn.textContent='Sending...';
+    const orderSummary=cart.map(i=>`${i.qty}x ${i.name}`).join(', ');
+    try{
+      const res=await fetch(SHEETDB_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data:[{timestamp:new Date().toLocaleString('en-PK',{timeZone:'Asia/Karachi'}),firstName:fn,lastName:ln,phone:ph,address:ad,product:orderSummary,message:ms||'—'}]})});
+      if(!res.ok)throw 0;
+      document.getElementById('checkoutForm').style.display='none';
+      document.getElementById('checkoutSuccess').style.display='block';
+      cart=[];renderCart();
+    }catch(e){alert('Could not send. Please try WhatsApp.');}
+    btn.disabled=false;btn.textContent='Send Order Request';
+  }
+
+  // OLD FORM (contact section) — kept for direct orders
   function showError(id,msg){const el=document.getElementById(id);el.textContent=msg;el.style.display='block';}
   function clearErrors(){document.querySelectorAll('.ferror').forEach(e=>e.style.display='none');}
-  function validatePhone(p){return/^(\+92|0092|0)?[3][0-9]{9}$/.test(p.replace(/\s/g,''));}
   async function submitForm(){
     clearErrors();
     const fn=document.getElementById('f_fname').value.trim(),ln=document.getElementById('f_lname').value.trim(),ph=document.getElementById('f_phone').value.trim(),ad=document.getElementById('f_address').value.trim(),pr=document.getElementById('f_product').value,ms=document.getElementById('f_message').value.trim();
@@ -645,8 +856,10 @@
     try{const res=await fetch(SHEETDB_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data:[{timestamp:new Date().toLocaleString('en-PK',{timeZone:'Asia/Karachi'}),firstName:fn,lastName:ln,phone:ph,address:ad,product:pr,message:ms||'—'}]})});if(!res.ok)throw 0;document.getElementById('fsuccess').style.display='block';['f_fname','f_lname','f_phone','f_address','f_product','f_message'].forEach(id=>document.getElementById(id).value='');setTimeout(()=>document.getElementById('fsuccess').style.display='none',7000);}catch(e){alert('Could not send. Please try WhatsApp.');}
     btn.disabled=false;btn.textContent='Send Order Request';
   }
-  const ADMIN_PASS='atlantis2025';
-  function openAdmin(){const p=prompt('Admin password:');if(p!==ADMIN_PASS){alert('Wrong!');return;}document.getElementById('adminPanel').style.display='flex';loadOrders();}
+
+  // ADMIN
+  const ADMIN_HASH='8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918';
+  function openAdmin(){const p=prompt('Admin password:');crypto.subtle.digest('SHA-256',new TextEncoder().encode(p)).then(h=>{const hex=[...new Uint8Array(h)].map(b=>b.toString(16).padStart(2,'0')).join('');if(hex!==ADMIN_HASH){alert('Wrong!');return;}document.getElementById('adminPanel').style.display='flex';loadOrders();});}
   function closeAdmin(){document.getElementById('adminPanel').style.display='none';}
   async function loadOrders(){document.getElementById('adminTable').innerHTML='<tr><td colspan="6" style="text-align:center;padding:2rem;">Loading...</td></tr>';try{const data=await(await fetch(SHEETDB_URL)).json();if(!data.length){document.getElementById('adminTable').innerHTML='<tr><td colspan="6" style="text-align:center;padding:2rem;color:#888;">No orders yet.</td></tr>';return;}document.getElementById('adminCount').textContent=data.length+' orders';document.getElementById('adminTable').innerHTML=data.reverse().map(o=>`<tr><td>${o.timestamp||'—'}</td><td>${o.firstName||''} ${o.lastName||''}</td><td>${o.phone||'—'}</td><td>${o.address||'—'}</td><td><strong>${o.product||'—'}</strong></td><td>${o.message||'—'}</td></tr>`).join('');}catch(e){document.getElementById('adminTable').innerHTML='<tr><td colspan="6" style="text-align:center;color:red;padding:2rem;">Failed to load.</td></tr>';}}
 </script>
